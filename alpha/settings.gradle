@@ -1,0 +1,2 @@
+include ':beta'
+project(':beta').projectDir = new File(rootDir, '../beta')

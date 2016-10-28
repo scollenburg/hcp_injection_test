@@ -1,0 +1,15 @@
+<beans xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+      http://xmlns.jcp.org/xml/ns/javaee
+      http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
+	bean-discovery-mode="all">
+	<!-- Specify a single class as an alternative. This should be avoided when 
+		possible. -->
+	<!-- alternatives>
+	   <class>com.example.inject.ThousandsCounter</class>
+	 </alternatives -->
+	<!-- Using a stereotype annotation to mark alternatives. -->
+	<alternatives>
+		<stereotype>com.example.inject.ParentProjectAlternative</stereotype>
+	</alternatives>
+</beans>

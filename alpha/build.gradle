@@ -1,0 +1,55 @@
+apply plugin: 'java'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'war'
+apply from: 'neo-tasks.gradle'
+
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
+
+buildDir = "build"
+
+println project("beta").projectDir
+
+eclipse { pathVariables 'GRADLE_USER_HOME': gradle.gradleUserHomeDir   
+    wtp {
+        component {
+            //you can configure the context path:
+            contextPath = '/'
+        }
+    }
+}
+
+war { 
+	baseName = "alpha"
+	webAppDirName = "WebContent"	
+	// from( "${buildDir}/WebContent") 
+	}
+	
+println """\
+Target compatibility: ${project.targetCompatibility}
+war webAppDir: ${webAppDir}
+war target: ${war.archivePath}
+"""
+	
+project.ext {  
+  neo_application = 'hcpinjalpha2'  
+  
+  // These should go into local .gradle/gradle.properties which should be excluded fom SCM (e.g. Git)  
+  // neo_host     = "us1.hana.ondemand.com"  
+  // neo_account  = "See GRADLE_USER_HOME gradle.properties"
+  // neo_password = "See GRADLE_USER_HOME gradle.properties"  
+  // neo_user     = "See GRADLE_USER_HOME gradle.properties"
+}
+
+repositories {
+    // Use 'jcenter' for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+}
+
+dependencies {
+    compile project(':beta')
+	compile 'org.slf4j:slf4j-api:1.7.21'
+	compileOnly 'javax.servlet:javax.servlet-api:3.1.0'
+	compileOnly group: 'com.sap.cloud', name: 'neo-javaee6-wp-api', version:'2.87.10'	
+}
