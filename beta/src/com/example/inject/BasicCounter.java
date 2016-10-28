@@ -15,7 +15,6 @@ public class BasicCounter implements CounterInterface {
 
 	@Override
 	public int getNext() {
-		// TODO Auto-generated method stub
 		return current++;
 	}
 
